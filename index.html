@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      {{ message }}
+    </div>
+
+    <div id="app2">
+      <span v-bind:title="sms">
+        Наведи на меня курсор на пару секунд,
+    чтобы увидеть динамически связанное значение title!
+      </span>
+    </div>
+
+    <div id="app3">
+      <span v-if="seen">Я есть</span>
+    </div>
+
+    <div id="app4">
+      <ol>
+        <li v-for="item in arr">
+          {{ item.text }}
+        </li>
+      </ol>
+    </div>
+
+    <div id="app5">
+      <p>{{ message }}</p>
+      <button v-on:click="reverseMessage"  v-on:dblclick="oneMoreMethod">Перевернуть сообщение</button>
+    </div>
+
+    <div id="app6">
+      <p>{{ message }}</p>
+      <input v-model="message">
+    </div>
+
+    <div id="app7">
+      <ol>
+        <!-- item - это "штучка в кучке", может называться как угодно, это один элемент массива-->
+        <!-- v-for создаст то кол-во li, сколько элементом в переданном из data массиве -->
+        <!-- v-bind:todo поддерживает состояние элемента в соответствии со значением входного параметра -->
+        <todo-item
+                v-for="item in groceryList"
+                v-bind:todo="item"
+                v-bind:key="item.id"
+        ></todo-item>
+      </ol>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      var app = new Vue ({
+          el: '#app',
+          data: {
+              message: 'Привет, Vue! Я тебя люблю!'
+          }
+      });
+
+      var app2 = new Vue({
+          el: '#app2',
+          data: {
+              sms: 'Вы загрузили эту страницу: ' + new Date().toLocaleString()
+          }
+      })
+
+      var app3 = new Vue ({
+          el: '#app3',
+          data: {
+              seen: true
+          }
+      })
+
+      var app4 = new Vue ({
+          el: '#app4',
+          data: {
+              arr: [
+                  {text: 'Выучить Vue'},
+                  {text: 'Выучить Webpack'},
+                  {text: 'Стать крутым фронтом'}
+              ]
+          }
+      })
+
+      var app5 = new Vue ({
+          el: '#app5',
+          data: {
+              message: 'Привет, Vue! Я тебя люблю!'
+          },
+          methods: {
+              reverseMessage: function () {
+                  this.message = this.message.split('').reverse().join('')
+              },
+              oneMoreMethod: function () {
+                  this.message = this.message.split('').reverse().join(' ')
+              }
+          }
+      });
+
+      var app6 = new Vue ({
+          el: '#app6',
+          data: {
+              message: 'Напиши тут что-нибудь'
+          }
+      })
+
+      Vue.component('todo-item', {
+          props: ['todo'],
+          template: '<li>{{ todo.text }}</li>'
+      });
+
+      var app7 = new Vue({
+          el: '#app7',
+          data: {
+              groceryList: [
+                  {id: 0, text: 'Овощи'}, // каждый пункт - это item in groceryList
+                  {id: 1, text: 'Сыр'}, // у каждого item есть свойство id и свойство text
+                  {id: 2, text: 'Что там еще люди едят?'}
+              ]
+          }
+      });
+
+
+    </script>
+  </body>
+</html>
