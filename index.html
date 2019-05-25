@@ -44,12 +44,30 @@
       <ol>
         <!-- item - это "штучка в кучке", может называться как угодно, это один элемент массива-->
         <!-- v-for создаст то кол-во li, сколько элементом в переданном из data массиве -->
-        <!-- v-bind:todo поддерживает состояние элемента в соответствии со значением входного параметра -->
+        <!-- v-bind:todo -->  <!-- поддерживает состояние элемента в соответствии со значением входного параметра -->
         <todo-item
                 v-for="item in groceryList"
                 v-bind:todo="item"
                 v-bind:key="item.id"
         ></todo-item>
+      </ol>
+    </div>
+
+    <div id="app11">
+      <p>Сообщение (прямая интерполяция ТЕКСТА) : <span>{{ message1 }}</span></p>
+      <p>Сообщение (прямая интерполяция КОДА) : <span>{{ message2 }}</span></p>
+      <p>Сообщение (код через v-html) : <span v-html='message3'>{{ message3 }}</span></p>
+
+      <button v-bind:disabled="isButtonDisabled">Кнопка</button>
+
+      <p>{{ +number + 1 }}</p>
+      <p>{{ ok ? 'Yes' : 'No' }}</p>
+      <p>{{ a + number }}</p>
+
+      <div v-bind:class="'list-' + id"></div>
+
+      <ol>
+        <li v-for="item in items" v-bind:class="'social social--' + item.mod "> {{ item.text }}</li>
       </ol>
     </div>
 
@@ -126,6 +144,34 @@
               ]
           }
       });
+
+      var app11 = new Vue ({
+          el: '#app11',
+          data: {
+              message1: 'Hello, World!',
+              message2: '<span style="color: darkmagenta">Hello, World! Now it\\\'s </span><span style="color: darkmagenta">\' + new Date().toLocaleString() + \'</span>',
+              message3: '<span style="color: darkmagenta">Hello, World! Now it\'s </span><span style="color: darkmagenta">' + new Date().toLocaleString() + '</span>',
+              isButtonDisabled: 'yeah',
+              number: 8,
+              ok: true,
+              a: 2,
+              id: 'block',
+              items: [
+                  {
+                      mod: 'fb',
+                      text: 'Facebook'
+                  },
+                  {
+                      mod: 'vk',
+                      text: 'Вконтакте'
+                  },
+                  {
+                      mod: 'tw',
+                      text: 'Twitter'
+                  }
+              ]
+          }
+      })
 
 
     </script>
