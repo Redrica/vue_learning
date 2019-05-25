@@ -53,6 +53,15 @@
       </ol>
     </div>
 
+    <div id="app8">
+      <p> {{ foo }} </p>
+    </div>
+
+    <div id="app9">
+      <p>Сообщение: {{ rawHTML }}</p>
+      <p>Сообщение: <span v-html="rawHTML"></span></p>
+    </div>
+
     <div id="app11">
       <p>Сообщение (прямая интерполяция ТЕКСТА) : <span>{{ message1 }}</span></p>
       <p>Сообщение (прямая интерполяция КОДА) : <span>{{ message2 }}</span></p>
@@ -145,6 +154,24 @@
           }
       });
 
+      var obj = {
+          foo: 'bar'
+      };
+
+      Object.freeze(obj);
+
+      new Vue({
+          el: '#app8',
+          data: obj
+      });
+
+      var app9 = new Vue ({
+          el: '#app9',
+          data: {
+              rawHTML: '<span style="color: darkred">Этот текст красный</span>',
+          }
+      });
+
       var app11 = new Vue ({
           el: '#app11',
           data: {
@@ -172,8 +199,6 @@
               ]
           }
       })
-
-
     </script>
   </body>
 </html>
