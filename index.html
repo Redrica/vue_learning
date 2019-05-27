@@ -7,6 +7,12 @@
     <title>Document</title>
   </head>
   <body>
+  <style>
+    body {
+      background-image: url("img/bg_gray_sfweb_small.jpg");
+      background-repeat: repeat;
+    }
+  </style>
     <div id="app">
       {{ message }}
     </div>
@@ -78,6 +84,14 @@
       <ol>
         <li v-for="item in items" v-bind:class="'social social--' + item.mod "> {{ item.text }}</li>
       </ol>
+    </div>
+
+    <div>
+      <div id="app12">
+        <p> {{ text }} </p>
+        <img :src="imgUrls.b" alt="">
+        <img :src="imgUrls.a" alt="">
+      </div>
     </div>
 
 
@@ -198,6 +212,17 @@
                   }
               ]
           }
+      })
+
+      var app12 = new Vue ({
+        el: '#app12',
+        data: {
+          text: 'Привет, я текст! :-)',
+          imgUrls: {
+            a: 'img/banner.jpg',
+            b: 'img/banner.webp'
+          }
+        }
       })
     </script>
   </body>
