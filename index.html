@@ -9,8 +9,8 @@
   <body>
   <style>
     body {
-      background-image: url("img/bg_gray_sfweb_small.jpg");
-      background-repeat: repeat;
+      /*background-image: url("img/bg_gray_sfweb_small.jpg");*/
+      /*background-repeat: repeat;*/
     }
   </style>
     <div id="app">
@@ -89,9 +89,17 @@
     <div>
       <div id="app12">
         <p> {{ text }} </p>
-        <img :src="imgUrls.b" alt="">
-        <img :src="imgUrls.a" alt="">
+        <!--<img :src="imgUrls.b" alt="">-->
+        <!--<img :src="imgUrls.a" alt="">-->
+        <!--<a v-bind:[someAttr]="value"> ... </a>-->
+        <!--<a v-bind:['foo' + bar]="value"> ... </a>--> <!-- Пример, как НЕ надо -->
       </div>
+    </div>
+
+    <div id="app13">
+      <p>Изначальное сообщение: {{ startMessage }}</p>
+      <p>Итоговое сообщение: {{ computedMessage }}</p>
+      <p>Date now: {{ now }}</p>
     </div>
 
 
@@ -218,11 +226,29 @@
         el: '#app12',
         data: {
           text: 'Привет, я текст! :-)',
+            someattr: 'data-attr',
+            value: 'fooBarr',
+            bar: 'data-bar',
           imgUrls: {
             a: 'img/banner.jpg',
             b: 'img/banner.webp'
           }
         }
+      })
+
+      var app13 = new Vue ({
+          el: '#app13',
+          data: {
+              startMessage: 'Hello, Vue! I love You!'
+          },
+          computed: {
+              computedMessage: function () {
+                  return this.startMessage.split('').reverse().join('')
+              },
+              now: function () {
+                  return Date.now();
+              }
+          }
       })
     </script>
   </body>
