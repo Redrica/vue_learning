@@ -13,60 +13,60 @@
       /*background-repeat: repeat;*/
     }
   </style>
-    <div id="app">
-      {{ message }}
-    </div>
+    <!--<div id="app">-->
+      <!--{{ message }}-->
+    <!--</div>-->
 
-    <div id="app2">
-      <span v-bind:title="sms">
-        Наведи на меня курсор на пару секунд,
-    чтобы увидеть динамически связанное значение title!
-      </span>
-    </div>
+    <!--<div id="app2">-->
+      <!--<span v-bind:title="sms">-->
+        <!--Наведи на меня курсор на пару секунд,-->
+    <!--чтобы увидеть динамически связанное значение title!-->
+      <!--</span>-->
+    <!--</div>-->
 
-    <div id="app3">
-      <span v-if="seen">Я есть</span>
-    </div>
+    <!--<div id="app3">-->
+      <!--<span v-if="seen">Я есть</span>-->
+    <!--</div>-->
 
-    <div id="app4">
-      <ol>
-        <li v-for="item in arr">
-          {{ item.text }}
-        </li>
-      </ol>
-    </div>
+    <!--<div id="app4">-->
+      <!--<ol>-->
+        <!--<li v-for="item in arr">-->
+          <!--{{ item.text }}-->
+        <!--</li>-->
+      <!--</ol>-->
+    <!--</div>-->
 
-    <div id="app5">
-      <p>{{ message }}</p>
-      <button v-on:click="reverseMessage"  v-on:dblclick="oneMoreMethod">Перевернуть сообщение</button>
-    </div>
+    <!--<div id="app5">-->
+      <!--<p>{{ message }}</p>-->
+      <!--<button v-on:click="reverseMessage"  v-on:dblclick="oneMoreMethod">Перевернуть сообщение</button>-->
+    <!--</div>-->
 
-    <div id="app6">
-      <p>{{ message }}</p>
-      <input v-model="message">
-    </div>
+    <!--<div id="app6">-->
+      <!--<p>{{ message }}</p>-->
+      <!--<input v-model="message">-->
+    <!--</div>-->
 
-    <div id="app7">
-      <ol>
-        <!-- item - это "штучка в кучке", может называться как угодно, это один элемент массива-->
-        <!-- v-for создаст то кол-во li, сколько элементом в переданном из data массиве -->
-        <!-- v-bind:todo -->  <!-- поддерживает состояние элемента в соответствии со значением входного параметра -->
-        <todo-item
-                v-for="item in groceryList"
-                v-bind:todo="item"
-                v-bind:key="item.id"
-        ></todo-item>
-      </ol>
-    </div>
+    <!--<div id="app7">-->
+      <!--<ol>-->
+        <!--&lt;!&ndash; item - это "штучка в кучке", может называться как угодно, это один элемент массива&ndash;&gt;-->
+        <!--&lt;!&ndash; v-for создаст то кол-во li, сколько элементом в переданном из data массиве &ndash;&gt;-->
+        <!--&lt;!&ndash; v-bind:todo &ndash;&gt;  &lt;!&ndash; поддерживает состояние элемента в соответствии со значением входного параметра &ndash;&gt;-->
+        <!--<todo-item-->
+                <!--v-for="item in groceryList"-->
+                <!--v-bind:todo="item"-->
+                <!--v-bind:key="item.id"-->
+        <!--&gt;</todo-item>-->
+      <!--</ol>-->
+    <!--</div>-->
 
-    <div id="app8">
-      <p> {{ foo }} </p>
-    </div>
+    <!--<div id="app8">-->
+      <!--<p> {{ foo }} </p>-->
+    <!--</div>-->
 
-    <div id="app9">
-      <p>Сообщение: {{ rawHTML }}</p>
-      <p>Сообщение: <span v-html="rawHTML"></span></p>
-    </div>
+    <!--<div id="app9">-->
+      <!--<p>Сообщение: {{ rawHTML }}</p>-->
+      <!--<p>Сообщение: <span v-html="rawHTML"></span></p>-->
+    <!--</div>-->
 
     <div id="app11">
       <p>Сообщение (прямая интерполяция ТЕКСТА) : <span>{{ message1 }}</span></p>
@@ -99,100 +99,114 @@
     <div id="app13">
       <p>Изначальное сообщение: {{ startMessage }}</p>
       <p>Итоговое сообщение: {{ computedMessage }}</p>
+      <p>Итоговое сообщение: {{ getEndMessage() }}</p>
       <p>Date now: {{ now }}</p>
     </div>
 
+    <div id="app14">
+      <p>{{ fullName }}</p>
+    </div>
 
+    <div id="watch-example">
+      <p>
+        Задайте вопрос, на который можно ответить «да» или «нет»:
+        <input type="text" v-model="question">
+      </p>
+      <p>{{ answer }}</p>
+    </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
     <script>
-      var app = new Vue ({
-          el: '#app',
-          data: {
-              message: 'Привет, Vue! Я тебя люблю!'
-          }
-      });
-
-      var app2 = new Vue({
-          el: '#app2',
-          data: {
-              sms: 'Вы загрузили эту страницу: ' + new Date().toLocaleString()
-          }
-      })
-
-      var app3 = new Vue ({
-          el: '#app3',
-          data: {
-              seen: true
-          }
-      })
-
-      var app4 = new Vue ({
-          el: '#app4',
-          data: {
-              arr: [
-                  {text: 'Выучить Vue'},
-                  {text: 'Выучить Webpack'},
-                  {text: 'Стать крутым фронтом'}
-              ]
-          }
-      })
-
-      var app5 = new Vue ({
-          el: '#app5',
-          data: {
-              message: 'Привет, Vue! Я тебя люблю!'
-          },
-          methods: {
-              reverseMessage: function () {
-                  this.message = this.message.split('').reverse().join('')
-              },
-              oneMoreMethod: function () {
-                  this.message = this.message.split('').reverse().join(' ')
-              }
-          }
-      });
-
-      var app6 = new Vue ({
-          el: '#app6',
-          data: {
-              message: 'Напиши тут что-нибудь'
-          }
-      })
-
-      Vue.component('todo-item', {
-          props: ['todo'],
-          template: '<li>{{ todo.text }}</li>'
-      });
-
-      var app7 = new Vue({
-          el: '#app7',
-          data: {
-              groceryList: [
-                  {id: 0, text: 'Овощи'}, // каждый пункт - это item in groceryList
-                  {id: 1, text: 'Сыр'}, // у каждого item есть свойство id и свойство text
-                  {id: 2, text: 'Что там еще люди едят?'}
-              ]
-          }
-      });
-
-      var obj = {
-          foo: 'bar'
-      };
-
-      Object.freeze(obj);
-
-      new Vue({
-          el: '#app8',
-          data: obj
-      });
-
-      var app9 = new Vue ({
-          el: '#app9',
-          data: {
-              rawHTML: '<span style="color: darkred">Этот текст красный</span>',
-          }
-      });
+      // var app = new Vue ({
+      //     el: '#app',
+      //     data: {
+      //         message: 'Привет, Vue! Я тебя люблю!'
+      //     }
+      // });
+      //
+      // var app2 = new Vue({
+      //     el: '#app2',
+      //     data: {
+      //         sms: 'Вы загрузили эту страницу: ' + new Date().toLocaleString()
+      //     }
+      // })
+      //
+      // var app3 = new Vue ({
+      //     el: '#app3',
+      //     data: {
+      //         seen: true
+      //     }
+      // })
+      //
+      // var app4 = new Vue ({
+      //     el: '#app4',
+      //     data: {
+      //         arr: [
+      //             {text: 'Выучить Vue'},
+      //             {text: 'Выучить Webpack'},
+      //             {text: 'Стать крутым фронтом'}
+      //         ]
+      //     }
+      // })
+      //
+      // var app5 = new Vue ({
+      //     el: '#app5',
+      //     data: {
+      //         message: 'Привет, Vue! Я тебя люблю!'
+      //     },
+      //     methods: {
+      //         reverseMessage: function () {
+      //             this.message = this.message.split('').reverse().join('')
+      //         },
+      //         oneMoreMethod: function () {
+      //             this.message = this.message.split('').reverse().join(' ')
+      //         }
+      //     }
+      // });
+      //
+      // var app6 = new Vue ({
+      //     el: '#app6',
+      //     data: {
+      //         message: 'Напиши тут что-нибудь'
+      //     }
+      // })
+      //
+      // Vue.component('todo-item', {
+      //     props: ['todo'],
+      //     template: '<li>{{ todo.text }}</li>'
+      // });
+      //
+      // var app7 = new Vue({
+      //     el: '#app7',
+      //     data: {
+      //         groceryList: [
+      //             {id: 0, text: 'Овощи'}, // каждый пункт - это item in groceryList
+      //             {id: 1, text: 'Сыр'}, // у каждого item есть свойство id и свойство text
+      //             {id: 2, text: 'Что там еще люди едят?'}
+      //         ]
+      //     }
+      // });
+      //
+      // var obj = {
+      //     foo: 'bar'
+      // };
+      //
+      // Object.freeze(obj);
+      //
+      // new Vue({
+      //     el: '#app8',
+      //     data: obj
+      // });
+      //
+      // var app9 = new Vue ({
+      //     el: '#app9',
+      //     data: {
+      //         rawHTML: '<span style="color: darkred">Этот текст красный</span>',
+      //     }
+      // });
 
       var app11 = new Vue ({
           el: '#app11',
@@ -241,12 +255,79 @@
           data: {
               startMessage: 'Hello, Vue! I love You!'
           },
+          methods: {
+              getEndMessage: function () {
+                  return this.startMessage.split('').join('-')
+              }
+          },
           computed: {
               computedMessage: function () {
                   return this.startMessage.split('').reverse().join('')
               },
               now: function () {
                   return Date.now();
+              }
+          }
+      })
+
+      var app14 = new Vue ({
+          el: '#app14',
+          data: {
+              firstName: 'Foo',
+              lastName: 'Bar'
+          },
+          computed: {
+            fullName: {
+                get: function () {
+                    return this.firstName + ' ' + this.lastName
+                },
+                // set: function (newValue) {
+                //  var names = newValue.split(' ');
+                //  this.firstName = names[0];
+                //  this.lastName = names[names.length - 1];
+                // }
+            }
+          }
+      })
+
+      var watchExampleVM = new Vue ({
+          el: '#watch-example',
+          data: {
+              question: '', // чтобы можно было установить реактивную связь (?)
+              answer: 'Пока вы не зададите вопрос, я не смогу ответить!'
+          },
+          watch: {
+          //    эта функция запускается при любом изменении question (значение поля)
+              question: function (newQuestion, oldQuestion) {
+                  this.answer = 'Ожидаю, когда вы закончите печатать…'
+                  this.debouncedGetAnswer()
+              }
+          },
+          created: function () {
+              // _.debounce — это функция lodash, позволяющая ограничить то,
+              // насколько часто может выполняться определённая операция.
+              // В данном случае мы ограничиваем частоту обращений к yesno.wtf/api,
+              // дожидаясь завершения печати вопроса перед отправкой ajax-запроса.
+              // Узнать больше о функции _.debounce (и её родственнице _.throttle),
+              // можно в документации: https://lodash.com/docs#debounce
+              this.debouncedGetAnswer = _.debounce(this.getAnswer, 500)
+          },
+          methods: {
+              getAnswer: function () {
+                  if (this.question.indexOf('?') === -1) {
+                      this.answer = 'Вопросы обычно заканчиваются вопросительным знаком ;-)'
+                      return
+                  }
+
+                  this.answer = 'Думаю…';
+                  var vm = this;
+                  axios.get('https://yesno.wtf/api')
+                      .then(function (response) {
+                          vm.answer = _.capitalize(response.data.answer)
+                      })
+                      .catch(function (error) {
+                          vm.answer = 'Ошибка! Не могу связаться с API. ' + error
+                      })
               }
           }
       })
