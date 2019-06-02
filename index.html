@@ -5,14 +5,50 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+      body {
+        /*background-image: url("img/bg_gray_sfweb_small.jpg");*/
+        /*background-repeat: repeat;*/
+      }
+
+      .post-block {
+        width: 500px;
+        height: 200px;
+        margin: 0 auto;
+        padding: 20px;
+        border-radius: 20px;
+        box-sizing: border-box;
+        /*background-origin: padding-box, border-box;*/
+        background-repeat: no-repeat;
+        border: 10px solid transparent;
+        border-image-source: url("img/post-back.png");
+        border-image-slice: 12;
+
+        background-image:
+                radial-gradient(circle at center, #fff 0, #fff 46%, transparent 50%, transparent),
+                radial-gradient(circle at center, #fff 0, #fff 46%, transparent 50%, transparent),
+                radial-gradient(circle at center, #fff 0, #fff 46%, transparent 50%, transparent),
+                radial-gradient(circle at center, #fff 0, #fff 46%, transparent 50%, transparent),
+                linear-gradient(to bottom, antiquewhite, antiquewhite);
+        background-position:
+                5px 5px,
+                calc(100% - 5px) 5px,
+                5px calc(100% - 5px),
+                calc(100% - 5px) calc(100% - 5px),
+      0 0;
+        background-size:
+                12px 12px,
+                12px 12px,
+                12px 12px,
+                12px 12px,
+                100% 100%;
+
+      }
+
+    </style>
   </head>
   <body>
-  <style>
-    body {
-      /*background-image: url("img/bg_gray_sfweb_small.jpg");*/
-      /*background-repeat: repeat;*/
-    }
-  </style>
+
     <!--<div id="app">-->
       <!--{{ message }}-->
     <!--</div>-->
@@ -113,6 +149,18 @@
         <input type="text" v-model="question">
       </p>
       <p>{{ answer }}</p>
+    </div>
+
+    <div id="post">
+      <div class="post-block"></div>
+    </div>
+
+    <div id="classes">
+      <div v-bind:class="classObject">Куку</div>
+    </div>
+
+    <div id="classesTwo">
+      <div v-bind:class="[{active: isActive}, errorClass]">Массив</div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
@@ -329,6 +377,36 @@
                           vm.answer = 'Ошибка! Не могу связаться с API. ' + error
                       })
               }
+          }
+      })
+
+      var post = new Vue ({
+          el: '#post'
+      })
+
+      var vm = new Vue ({
+          el: '#classes',
+          data: {
+              isActive: true,
+              error: {
+                  type: 'fatal'
+              }
+          },
+          computed: {
+              classObject: function () {
+                  return {
+                      active: this.isActive && !this.error,
+                      'text-danger': this.error && this.error.type === 'fatal'
+                  }
+              }
+          }
+      })
+
+      var vm2 = new Vue ({
+          el: '#classesTwo',
+          data: {
+              isActive: true,
+              errorClass: 'danger-2'
           }
       })
     </script>
