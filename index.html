@@ -185,6 +185,24 @@
       <button v-show="show">Переключить!</button>
     </div>
 
+    <ul id="list">
+      <li v-for="(item, index) of items">
+        {{ parentMessage }} - {{ index }} - {{ item.message }}
+      </li>
+    </ul>
+
+    <ul id="list2">
+      <li v-for="(word, key, number) in object">
+        {{ number + 1 }} - {{ key }} : {{ word }}
+      </li>
+    </ul>
+
+    <div id="element">
+      <div v-for="item in items" v-bind:key="item.id">
+        {{ item.message }}
+      </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -469,6 +487,51 @@
           },
 
 
+      })
+
+      var list = new Vue({
+          el: "#list",
+          data: {
+              parentMessage: 'Message',
+              items: [
+                  { message: 'Foo'},
+                  { message: 'Bar'},
+                  { message: 'Bazz'},
+                  { message: 'Hello'}
+              ]
+          }
+      })
+
+      var listTwo = new Vue({
+          el: "#list2",
+          data: {
+              object: {
+                  answer: 'Difficult but possible',
+                  title: 'How to learn Vue',
+                  author: 'Mr Nobody',
+                  date: '2019-06-24'
+              }
+          }
+      })
+
+      var elem = new Vue ({
+          el: "#element",
+          data: {
+              items: [
+                  {
+                      id: 3,
+                      message: 'Третий'
+                  },
+                  {
+                      id: 1,
+                      message: 'Первый'
+                  },
+                  {
+                      id: 2,
+                      message: 'Второй'
+                  }
+              ]
+          }
       })
     </script>
   </body>
